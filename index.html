@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RED·TEAM·LAB — Termux, OSINT, локальные LLM-агенты</title>
-<meta name="description" content="Канал и лаборатория Xnode: Termux на Android, OSINT-разведка, локальные LLM-агенты. Гайды, туториалы, рабочие скрипты.">
-<link rel="canonical" href="https://xnode.sh/">
+<title>Xnode — Termux, OSINT и LLM-агенты на Python</title>
+<meta name="description" content="Open-source проекты Xnode: OSINT-утилиты для командной строки, локальный LLM-агент с tool-calling для Termux, синхронизация конфигов Claude Code.">
+<link rel="canonical" href="https://redteam.is-a.dev/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="RED·TEAM·LAB">
-<meta property="og:description" content="Termux, OSINT и локальные LLM-агенты. Гайды и рабочие скрипты от Xnode.">
-<meta property="og:url" content="https://xnode.sh/">
+<meta property="og:title" content="Xnode · RED·TEAM·LAB">
+<meta property="og:description" content="Open-source: OSINT CLI, локальный LLM-агент для Termux, dotfiles для Claude Code.">
+<meta property="og:url" content="https://redteam.is-a.dev/">
 <meta name="theme-color" content="#0b0d10">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230b0d10'/><path d='M7 11l5 5-5 5' stroke='%23ff2e4d' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/><path d='M15 21h10' stroke='%23ff2e4d' stroke-width='2.5' stroke-linecap='round'/></svg>">
 <style>
@@ -32,7 +32,7 @@ a:hover{color:var(--red)}
 
 /* header */
 header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(11,13,16,.85);backdrop-filter:blur(8px);z-index:10}
-.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px}
 .logo{font-family:var(--mono);font-weight:700;letter-spacing:.06em;font-size:15px;white-space:nowrap}
 .logo .r{color:var(--red)}
 .bar nav{display:flex;gap:18px;font-size:14px;color:var(--muted)}
@@ -67,6 +67,7 @@ h2{font-size:13px;font-family:var(--mono);letter-spacing:.16em;text-transform:up
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px;transition:.15s}
 .card:hover{border-color:var(--red)}
 .card h3{margin:0 0 10px;font-size:17px}
+.card code{font-family:var(--mono);font-size:.9em;color:var(--fg)}
 .card p{margin:0;color:var(--muted);font-size:15px}
 .card .num{font-family:var(--mono);font-size:12px;color:var(--red);display:block;margin-bottom:12px}
 
@@ -78,11 +79,22 @@ h2{font-size:13px;font-family:var(--mono);letter-spacing:.16em;text-transform:up
 .link small{color:var(--muted);font-size:14px}
 .link .arrow{color:var(--red);font-family:var(--mono);flex-shrink:0}
 
+/* projects */
+.proj{display:grid;gap:16px}
+.proj .card{display:block}
+.proj .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+.proj h3{margin:0;font-family:var(--mono);font-size:17px}
+.proj .lang{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.proj ul{margin:14px 0 0;padding-left:18px;color:var(--muted);font-size:14.5px}
+.proj li{margin:4px 0}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.tags span{font-family:var(--mono);font-size:11.5px;padding:3px 8px;border:1px solid var(--line);border-radius:6px;color:var(--muted)}
+
 /* note */
 .note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:8px;padding:18px 20px;color:var(--muted);font-size:14.5px}
 .note b{color:var(--fg)}
 
-footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--muted);font-size:14px}
+footer{border-top:1px solid var(--line);padding:32px 20px 48px;color:var(--muted);font-size:14px}
 footer .row{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between}
 footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
 </style>
@@ -93,8 +105,8 @@ footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
   <div class="wrap bar">
     <div class="logo">RED<span class="r">·</span>TEAM<span class="r">·</span>LAB</div>
     <nav>
-      <a href="#stack">Темы</a>
-      <a href="#links">Ссылки</a>
+      <a href="#projects">Проекты</a>
+      <a href="#links">Контакты</a>
     </nav>
   </div>
 </header>
@@ -102,61 +114,75 @@ footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
 <main class="wrap">
 
   <div class="hero">
-    <p class="kicker">Xnode · Винница, UA</p>
-    <h1>Телефон<span class="dot">.</span> Терминал<span class="dot">.</span> Свой агент<span class="dot">.</span></h1>
+    <p class="kicker">Xnode · Python · Linux · Android</p>
+    <h1>Инструменты для терминала<span class="dot">.</span> Даже в кармане<span class="dot">.</span></h1>
     <p class="lead">
-      Лаборатория для тех, кто хочет выжать из Android максимум: Termux вместо ноутбука,
-      OSINT без подписок и локальные LLM-агенты, которые работают у тебя, а не в чужом облаке.
-      Только то, что я сам запускал и проверил.
+      Я Дима, пишу open-source утилиты на Python, которые запускаются в Termux на Android
+      так же, как на обычном Linux: OSINT из командной строки, локальный LLM-агент
+      с tool-calling и конфиги для работы с Claude Code на нескольких машинах.
     </p>
     <div class="cta">
-      <a class="btn btn-main" href="https://t.me/xnode_sh">Читать в Telegram</a>
-      <a class="btn btn-ghost" href="https://github.com/xnode-sh">Код на GitHub</a>
+      <a class="btn btn-main" href="https://github.com/Xnode-sh">GitHub</a>
+      <a class="btn btn-ghost" href="#projects">Проекты</a>
     </div>
 
     <div class="term">
-      <div class="term-bar"><i></i><i></i><i></i><span>xnode@termux</span></div>
-<pre><span class="p">$</span> pkg install root-repo tsu git python
-<span class="p">$</span> proot-distro install ubuntu
-<span class="p">$</span> claude --dangerously-skip-permissions
-<span class="c"># агент поднят, ноутбук не понадобился</span></pre>
+      <div class="term-bar"><i></i><i></i><i></i><span>xnode@termux ~/termux-agent</span></div>
+<pre><span class="p">$</span> ollama serve &amp;
+<span class="p">$</span> python3 agent.py "что лежит в этой папке?"
+<span class="c">→ tool: list_dir(path=".")</span>
+<span class="c">→ agent.py  config.py  llm_client.py  tools.py  tests/</span></pre>
     </div>
   </div>
 
-  <section id="stack">
-    <h2>Что внутри</h2>
-    <div class="grid">
-      <div class="card">
-        <span class="num">01</span>
-        <h3>Termux</h3>
-        <p>Полноценный Linux в кармане: proot-distro, автоматизация, сервисы, скрипты под реальные задачи. Без рута, где это возможно.</p>
-      </div>
-      <div class="card">
-        <span class="num">02</span>
-        <h3>OSINT</h3>
-        <p>Разведка по открытым источникам: инструменты, методология, гигиена операций. Как искать и как не оставлять следов самому.</p>
-      </div>
-      <div class="card">
-        <span class="num">03</span>
-        <h3>LLM-агенты</h3>
-        <p>Локальные модели и автономные агенты: запуск на слабом железе, связка с терминалом, своя инфраструктура вместо подписок.</p>
-      </div>
+  <section id="projects">
+    <h2>Проекты</h2>
+    <div class="proj">
+
+      <a class="card" href="https://github.com/Xnode-sh/termux-agent">
+        <div class="top"><h3>termux-agent</h3><span class="lang">Python · MIT</span></div>
+        <p>Локальный LLM-агент с tool-calling для Termux. Модель крутится через Ollama прямо на телефоне, агент только дирижирует вызовами инструментов. Никакого облака.</p>
+        <ul>
+          <li>REPL и одноразовые запросы, выбор модели и хоста флагами</li>
+          <li>Инструменты: shell, файлы, OSINT-лукапы через Xnode</li>
+          <li>Подтверждение опасных операций по умолчанию, тесты на pytest</li>
+        </ul>
+        <div class="tags"><span>ollama</span><span>tool-calling</span><span>pyyaml</span><span>pytest</span></div>
+      </a>
+
+      <a class="card" href="https://github.com/Xnode-sh/Xnode">
+        <div class="top"><h3>Xnode</h3><span class="lang">Python · MIT</span></div>
+        <p>OSINT-утилиты для командной строки. Только пассивная разведка по открытым источникам: без брутфорса и обхода авторизации.</p>
+        <ul>
+          <li><code>email_osint.py</code> — проверка email по публичным сервисам</li>
+          <li><code>holehe_runner.py</code> — обход бага trio-сигналов в proot, чистый JSON на выходе</li>
+          <li><code>api_parser.py</code> — парсер JSON API с пагинацией, ретраями и обработкой 429</li>
+        </ul>
+        <div class="tags"><span>osint</span><span>requests</span><span>cli</span><span>proot</span></div>
+      </a>
+
+      <a class="card" href="https://github.com/Xnode-sh/xnode-agent-sync">
+        <div class="top"><h3>xnode-agent-sync</h3><span class="lang">Markdown · config</span></div>
+        <p>Общие инструкции и скилы для Claude Code на двух машинах: Termux на Android и PowerShell на Windows. Синхронизация через git и симлинки в <code>~/.claude</code>.</p>
+        <div class="tags"><span>claude-code</span><span>dotfiles</span><span>git</span></div>
+      </a>
+
     </div>
   </section>
 
   <section id="links">
-    <h2>Где я</h2>
+    <h2>Контакты</h2>
     <div class="links">
+      <a class="link" href="https://github.com/Xnode-sh">
+        <span><b>GitHub</b><small>Весь код, issues и PR</small></span>
+        <span class="arrow">→</span>
+      </a>
       <a class="link" href="https://t.me/xnode_sh">
-        <span><b>Telegram — RED·TEAM·LAB</b><small>Основной канал: разборы, скрипты, находки</small></span>
+        <span><b>Telegram — RED·TEAM·LAB</b><small>Пишу о том, как делаю эти проекты</small></span>
         <span class="arrow">→</span>
       </a>
       <a class="link" href="https://www.tiktok.com/@xnode.sh">
-        <span><b>TikTok</b><small>Короткие гайды и демки в вертикали</small></span>
-        <span class="arrow">→</span>
-      </a>
-      <a class="link" href="https://github.com/xnode-sh">
-        <span><b>GitHub</b><small>Исходники, конфиги и агенты из выпусков</small></span>
+        <span><b>TikTok</b><small>Короткие демки инструментов</small></span>
         <span class="arrow">→</span>
       </a>
     </div>
@@ -165,10 +191,10 @@ footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
   <section>
     <h2>Дисклеймер</h2>
     <p class="note">
-      <b>Всё здесь — в образовательных целях.</b> Материалы предназначены для легального тестирования
-      собственных систем, участия в CTF и защиты. Применение описанных техник к чужой
+      <b>Инструменты — для легального использования.</b> Код предназначен для легального тестирования
+      собственных систем, участия в CTF и защиты. Применение к чужой
       инфраструктуре без письменного разрешения владельца — преступление. Автор не несёт
-      ответственности за действия читателей.
+      ответственности за действия пользователей.
     </p>
   </section>
 
@@ -176,7 +202,7 @@ footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
 
 <footer class="wrap">
   <div class="row">
-    <span>© <span id="y">2026</span> Xnode · RED·TEAM·LAB</span>
+    <span>© <span id="y">2026</span> Xnode</span>
     <span>
       <a href="/studio.html">Content Studio</a> ·
       <a href="/terms.html">Условия</a> ·
