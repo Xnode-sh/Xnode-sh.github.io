@@ -1,12 +1,190 @@
 <!DOCTYPE html>
-<html lang="uk">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Xnode Content Studio</title>
-<style>body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.6;color:#222}a{color:#3366aa}</style>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RED·TEAM·LAB — Termux, OSINT, локальные LLM-агенты</title>
+<meta name="description" content="Канал и лаборатория Xnode: Termux на Android, OSINT-разведка, локальные LLM-агенты. Гайды, туториалы, рабочие скрипты.">
+<link rel="canonical" href="https://xnode.sh/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="RED·TEAM·LAB">
+<meta property="og:description" content="Termux, OSINT и локальные LLM-агенты. Гайды и рабочие скрипты от Xnode.">
+<meta property="og:url" content="https://xnode.sh/">
+<meta name="theme-color" content="#0b0d10">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230b0d10'/><path d='M7 11l5 5-5 5' stroke='%23ff2e4d' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/><path d='M15 21h10' stroke='%23ff2e4d' stroke-width='2.5' stroke-linecap='round'/></svg>">
+<style>
+:root{
+  --bg:#0b0d10; --panel:#12161b; --line:#232a33;
+  --fg:#e7ecf2; --muted:#8e9bab; --red:#ff2e4d; --red-dim:#c4162f;
+  --mono:ui-monospace,SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);
+  line-height:1.65;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(900px 500px at 50% -10%,rgba(255,46,77,.10),transparent 70%);
+}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+a{color:var(--fg);text-decoration:none}
+a:hover{color:var(--red)}
+
+/* header */
+header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(11,13,16,.85);backdrop-filter:blur(8px);z-index:10}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.logo{font-family:var(--mono);font-weight:700;letter-spacing:.06em;font-size:15px;white-space:nowrap}
+.logo .r{color:var(--red)}
+.bar nav{display:flex;gap:18px;font-size:14px;color:var(--muted)}
+.bar nav a{color:var(--muted)}
+
+/* hero */
+.hero{padding:64px 0 48px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 18px}
+h1{font-size:clamp(34px,8vw,60px);line-height:1.05;margin:0 0 20px;letter-spacing:-.02em;font-weight:800}
+h1 .dot{color:var(--red)}
+.lead{font-size:clamp(16px,4vw,19px);color:var(--muted);max-width:56ch;margin:0 0 32px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:10px;font-weight:600;font-size:15px;border:1px solid var(--line);transition:.15s}
+.btn-main{background:var(--red);border-color:var(--red);color:#fff}
+.btn-main:hover{background:var(--red-dim);border-color:var(--red-dim);color:#fff}
+.btn-ghost:hover{border-color:var(--red);color:var(--red)}
+
+/* terminal */
+.term{margin:40px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.term-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.term-bar i{width:10px;height:10px;border-radius:50%;background:#2c3541;display:block}
+.term-bar i:first-child{background:var(--red)}
+.term-bar span{margin-left:8px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.term pre{margin:0;padding:16px 14px;font-family:var(--mono);font-size:13px;line-height:1.75;color:var(--fg);overflow-x:auto}
+.term .p{color:var(--red)}
+.term .c{color:var(--muted)}
+
+/* sections */
+section{padding:56px 0;border-top:1px solid var(--line)}
+h2{font-size:13px;font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 28px;font-weight:600}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px;transition:.15s}
+.card:hover{border-color:var(--red)}
+.card h3{margin:0 0 10px;font-size:17px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card .num{font-family:var(--mono);font-size:12px;color:var(--red);display:block;margin-bottom:12px}
+
+/* links list */
+.links{display:grid;gap:12px}
+.link{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;transition:.15s}
+.link:hover{border-color:var(--red)}
+.link b{display:block;font-size:16px}
+.link small{color:var(--muted);font-size:14px}
+.link .arrow{color:var(--red);font-family:var(--mono);flex-shrink:0}
+
+/* note */
+.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:8px;padding:18px 20px;color:var(--muted);font-size:14.5px}
+.note b{color:var(--fg)}
+
+footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--muted);font-size:14px}
+footer .row{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between}
+footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+</style>
 </head>
 <body>
-<h1>Xnode Content Studio</h1>
-<p>Інструмент для креаторів: завантажує короткі навчальні відео у твій власний акаунт TikTok за твоєю явною згодою.</p>
-<p><a href="/terms.html">Умови використання</a> · <a href="/privacy.html">Політика конфіденційності</a></p>
+
+<header>
+  <div class="wrap bar">
+    <div class="logo">RED<span class="r">·</span>TEAM<span class="r">·</span>LAB</div>
+    <nav>
+      <a href="#stack">Темы</a>
+      <a href="#links">Ссылки</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Xnode · Винница, UA</p>
+    <h1>Телефон<span class="dot">.</span> Терминал<span class="dot">.</span> Свой агент<span class="dot">.</span></h1>
+    <p class="lead">
+      Лаборатория для тех, кто хочет выжать из Android максимум: Termux вместо ноутбука,
+      OSINT без подписок и локальные LLM-агенты, которые работают у тебя, а не в чужом облаке.
+      Только то, что я сам запускал и проверил.
+    </p>
+    <div class="cta">
+      <a class="btn btn-main" href="https://t.me/xnode_sh">Читать в Telegram</a>
+      <a class="btn btn-ghost" href="https://github.com/xnode-sh">Код на GitHub</a>
+    </div>
+
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>xnode@termux</span></div>
+<pre><span class="p">$</span> pkg install root-repo tsu git python
+<span class="p">$</span> proot-distro install ubuntu
+<span class="p">$</span> claude --dangerously-skip-permissions
+<span class="c"># агент поднят, ноутбук не понадобился</span></pre>
+    </div>
+  </div>
+
+  <section id="stack">
+    <h2>Что внутри</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="num">01</span>
+        <h3>Termux</h3>
+        <p>Полноценный Linux в кармане: proot-distro, автоматизация, сервисы, скрипты под реальные задачи. Без рута, где это возможно.</p>
+      </div>
+      <div class="card">
+        <span class="num">02</span>
+        <h3>OSINT</h3>
+        <p>Разведка по открытым источникам: инструменты, методология, гигиена операций. Как искать и как не оставлять следов самому.</p>
+      </div>
+      <div class="card">
+        <span class="num">03</span>
+        <h3>LLM-агенты</h3>
+        <p>Локальные модели и автономные агенты: запуск на слабом железе, связка с терминалом, своя инфраструктура вместо подписок.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="links">
+    <h2>Где я</h2>
+    <div class="links">
+      <a class="link" href="https://t.me/xnode_sh">
+        <span><b>Telegram — RED·TEAM·LAB</b><small>Основной канал: разборы, скрипты, находки</small></span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="link" href="https://www.tiktok.com/@xnode.sh">
+        <span><b>TikTok</b><small>Короткие гайды и демки в вертикали</small></span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="link" href="https://github.com/xnode-sh">
+        <span><b>GitHub</b><small>Исходники, конфиги и агенты из выпусков</small></span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Дисклеймер</h2>
+    <p class="note">
+      <b>Всё здесь — в образовательных целях.</b> Материалы предназначены для легального тестирования
+      собственных систем, участия в CTF и защиты. Применение описанных техник к чужой
+      инфраструктуре без письменного разрешения владельца — преступление. Автор не несёт
+      ответственности за действия читателей.
+    </p>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="row">
+    <span>© <span id="y">2026</span> Xnode · RED·TEAM·LAB</span>
+    <span>
+      <a href="/studio.html">Content Studio</a> ·
+      <a href="/terms.html">Условия</a> ·
+      <a href="/privacy.html">Приватность</a>
+    </span>
+  </div>
+</footer>
+
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
 </html>
