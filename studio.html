@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google" content="notranslate">
 <title>Xnode Content Studio</title>
 <style>
 body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.6;color:#222}
@@ -74,7 +75,7 @@ $('login').onclick = async () => {
     const cfg = await api('/config');
     const state = crypto.getRandomValues(new Uint32Array(4)).join('');
     ss.set('tt_state', state);
-    const q = new URLSearchParams({ client_key: cfg.client_key, scope: cfg.scope, response_type: 'code', redirect_uri: cfg.redirect_uri, state });
+    const q = new URLSearchParams({ client_key: cfg.client_key, scope: cfg.scope, response_type: 'code', redirect_uri: cfg.redirect_uri, state, disable_auto_auth: '1' });
     location.href = 'https://www.tiktok.com/v2/auth/authorize/?' + q;
   } catch (e) { log('Login error: ' + e.message); }
 };
