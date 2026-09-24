@@ -30,7 +30,7 @@ button.ghost{background:#eee;color:#222}
 
 <div class="card hidden" id="step-user">
   <h2>Connected account</h2>
-  <div class="user"><img id="avatar" alt=""><div><b id="name"></b><div class="muted">Session only. Nothing is stored on our side.</div></div></div>
+  <div class="user"><img id="avatar" alt=""><div><b id="name"></b><div class="muted">Session only. Nothing is stored on our side. Disconnect revokes the app's access.</div></div></div>
   <p><button class="ghost" id="logout">Disconnect</button></p>
 </div>
 
@@ -80,7 +80,12 @@ $('login').onclick = async () => {
   } catch (e) { log('Login error: ' + e.message); }
 };
 
-$('logout').onclick = () => { ss.del('tt_token'); location.replace(location.pathname); };
+$('logout').onclick = async () => {
+  // Revoke the app's access on TikTok, then forget the session token
+  try { log('Disconnecting...'); await api('/revoke', { json: {} }); } catch (e) { console.warn('Revoke failed:', e.message); }
+  ss.del('tt_token');
+  location.replace(location.pathname);
+};
 
 $('file').onchange = () => {
   const f = $('file').files[0];
