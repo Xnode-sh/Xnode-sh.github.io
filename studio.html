@@ -1,12 +1,158 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Xnode Content Studio</title>
-<style>body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.6;color:#222}a{color:#3366aa}</style>
+<style>
+body{font-family:-apple-system,Segoe UI,Roboto,sans-serif;max-width:720px;margin:40px auto;padding:0 20px;line-height:1.6;color:#222}
+a{color:#3366aa}
+.card{border:1px solid #ddd;border-radius:10px;padding:18px 20px;margin:18px 0}
+.card h2{margin:0 0 8px;font-size:1.1em}
+button{font:inherit;padding:9px 18px;border-radius:8px;border:0;background:#c4162f;color:#fff;cursor:pointer}
+button:disabled{background:#aaa;cursor:not-allowed}
+button.ghost{background:#eee;color:#222}
+.user{display:flex;align-items:center;gap:12px}
+.user img{width:44px;height:44px;border-radius:50%}
+.muted{color:#666;font-size:.9em}
+#log{white-space:pre-wrap;font-family:Consolas,monospace;font-size:.85em;background:#f6f6f6;border-radius:8px;padding:10px;min-height:1.5em}
+.hidden{display:none}
+</style>
 </head>
 <body>
 <h1>Xnode Content Studio</h1>
-<p>Інструмент для креаторів: завантажує короткі навчальні відео у твій власний акаунт TikTok за твоєю явною згодою.</p>
-<p><a href="/">RED·TEAM·LAB</a> · <a href="/terms.html">Умови використання</a> · <a href="/privacy.html">Політика конфіденційності</a></p>
+<p>A creator tool that uploads short educational videos to <b>your own</b> TikTok account as a draft, only after your explicit action. You finish and publish the post yourself in the TikTok app.</p>
+
+<div class="card" id="step-login">
+  <h2>1. Connect TikTok</h2>
+  <p class="muted">We request only <code>user.info.basic</code> (name and avatar) and <code>video.upload</code> (send a draft to your TikTok inbox).</p>
+  <button id="login">Log in with TikTok</button>
+</div>
+
+<div class="card hidden" id="step-user">
+  <h2>Connected account</h2>
+  <div class="user"><img id="avatar" alt=""><div><b id="name"></b><div class="muted">Session only. Nothing is stored on our side.</div></div></div>
+  <p><button class="ghost" id="logout">Disconnect</button></p>
+</div>
+
+<div class="card hidden" id="step-upload">
+  <h2>2. Upload a video as a draft</h2>
+  <p><input type="file" id="file" accept="video/mp4,video/quicktime,video/webm"></p>
+  <p class="muted" id="fileinfo"></p>
+  <button id="upload" disabled>Upload to TikTok</button>
+  <p class="muted">After upload, open TikTok and check your inbox notifications to edit and post the draft.</p>
+</div>
+
+<div class="card"><h2>Status</h2><div id="log">Ready.</div></div>
+
+<p><a href="/">RED·TEAM·LAB</a> · <a href="/terms/">Terms of Service</a> · <a href="/privacy/">Privacy Policy</a></p>
+
+<script>
+const API = 'https://xnode-studio.vercel.app/api';
+const PROXY_LIMIT = 4.4 * 1024 * 1024;
+const $ = id => document.getElementById(id);
+const log = m => { $('log').textContent = m; };
+const ss = {
+  get: k => { try { return sessionStorage.getItem(k); } catch { return null; } },
+  set: (k, v) => { try { sessionStorage.setItem(k, v); } catch {} },
+  del: k => { try { sessionStorage.removeItem(k); } catch {} },
+};
+
+async function api(path, opts = {}) {
+  const token = ss.get('tt_token');
+  const headers = Object.assign({}, opts.headers || {});
+  if (token) headers.Authorization = 'Bearer ' + token;
+  if (opts.json) { headers['Content-Type'] = 'application/json'; opts.body = JSON.stringify(opts.json); }
+  const r = await fetch(API + path, { method: opts.method || (opts.body ? 'POST' : 'GET'), headers, body: opts.body });
+  const d = await r.json().catch(() => ({}));
+  const err = d.error && d.error.code && d.error.code !== 'ok' ? d.error : null;
+  if (!r.ok || err) throw new Error((err && (err.message || err.code)) || ('HTTP ' + r.status));
+  return d;
+}
+
+$('login').onclick = async () => {
+  try {
+    log('Opening TikTok authorization...');
+    const cfg = await api('/config');
+    const state = crypto.getRandomValues(new Uint32Array(4)).join('');
+    ss.set('tt_state', state);
+    const q = new URLSearchParams({ client_key: cfg.client_key, scope: cfg.scope, response_type: 'code', redirect_uri: cfg.redirect_uri, state });
+    location.href = 'https://www.tiktok.com/v2/auth/authorize/?' + q;
+  } catch (e) { log('Login error: ' + e.message); }
+};
+
+$('logout').onclick = () => { ss.del('tt_token'); location.replace(location.pathname); };
+
+$('file').onchange = () => {
+  const f = $('file').files[0];
+  $('upload').disabled = !f;
+  $('fileinfo').textContent = f ? `${f.name}, ${(f.size / 1048576).toFixed(1)} MB` : '';
+};
+
+async function putVideo(url, f) {
+  const headers = { 'Content-Type': f.type || 'video/mp4', 'Content-Range': `bytes 0-${f.size - 1}/${f.size}` };
+  try {
+    const r = await fetch(url, { method: 'PUT', headers, body: f });
+    if (!r.ok) throw new Error('Upload HTTP ' + r.status);
+    return 'direct';
+  } catch (e) {
+    // Browser may be blocked by CORS: fall back to the server proxy for small files
+    if (!(e instanceof TypeError)) throw e;
+    if (f.size > PROXY_LIMIT) throw new Error('Direct upload blocked and file is larger than 4.4 MB for the fallback path');
+    const r = await fetch(API + '/upload', { method: 'PUT', headers: Object.assign({ 'X-Upload-Url': url }, headers, { 'Content-Type': 'application/octet-stream' }), body: f });
+    if (!r.ok) throw new Error('Upload (proxy) HTTP ' + r.status + ' ' + (await r.text()).slice(0, 200));
+    return 'proxy';
+  }
+}
+
+$('upload').onclick = async () => {
+  const f = $('file').files[0];
+  if (!f) return;
+  $('upload').disabled = true;
+  try {
+    log('Starting upload...');
+    const init = await api('/init', { json: { video_size: f.size } });
+    const { publish_id, upload_url } = init.data;
+    log('Uploading video...');
+    const via = await putVideo(upload_url, f);
+    log(`Uploaded (${via}). Waiting for TikTok to process...`);
+    for (let i = 0; i < 20; i++) {
+      await new Promise(r => setTimeout(r, 3000));
+      const s = await api('/status', { json: { publish_id } });
+      const st = s.data && s.data.status;
+      if (st === 'SEND_TO_USER_INBOX' || st === 'PUBLISH_COMPLETE') { log('Done! The draft is in your TikTok inbox. Open TikTok to edit and post it.'); return; }
+      if (st === 'FAILED') { log('TikTok failed to process the video: ' + (s.data.fail_reason || 'unknown reason')); return; }
+      log('Processing... (' + st + ')');
+    }
+    log('Still processing. Check your TikTok inbox in a minute.');
+  } catch (e) { log('Upload error: ' + e.message); }
+  finally { $('upload').disabled = !$('file').files[0]; }
+};
+
+async function showUser() {
+  const me = await api('/me');
+  const u = me.data.user;
+  $('name').textContent = u.display_name;
+  $('avatar').src = u.avatar_url;
+  $('step-login').classList.add('hidden');
+  $('step-user').classList.remove('hidden');
+  $('step-upload').classList.remove('hidden');
+  log('Connected. Choose a video to upload as a draft.');
+}
+
+(async () => {
+  const p = new URLSearchParams(location.search);
+  try {
+    if (p.get('error')) { log('TikTok authorization was cancelled: ' + (p.get('error_description') || p.get('error'))); return; }
+    if (p.get('code')) {
+      if (p.get('state') !== ss.get('tt_state')) throw new Error('State mismatch, please log in again');
+      ss.del('tt_state');
+      log('Finishing login...');
+      const t = await api('/token', { json: { code: p.get('code') } });
+      ss.set('tt_token', t.access_token);
+      history.replaceState(null, '', location.pathname);
+    }
+    if (ss.get('tt_token')) await showUser();
+  } catch (e) { ss.del('tt_token'); log('Error: ' + e.message); }
+})();
+</script>
 </body>
 </html>
