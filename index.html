@@ -150,8 +150,8 @@ footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
         <div class="tags"><span>ollama</span><span>tool-calling</span><span>pyyaml</span><span>pytest</span></div>
       </a>
 
-      <a class="card" href="https://github.com/Xnode-sh/Xnode">
-        <div class="top"><h3>Xnode</h3><span class="lang">Python · MIT</span></div>
+      <a class="card" href="https://github.com/Xnode-sh/xnode-osint">
+        <div class="top"><h3>xnode-osint</h3><span class="lang">Python · MIT</span></div>
         <p>OSINT-утилиты для командной строки. Только пассивная разведка по открытым источникам: без брутфорса и обхода авторизации.</p>
         <ul>
           <li><code>email_osint.py</code> — проверка email по публичным сервисам</li>
@@ -159,6 +159,50 @@ footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
           <li><code>api_parser.py</code> — парсер JSON API с пагинацией, ретраями и обработкой 429</li>
         </ul>
         <div class="tags"><span>osint</span><span>requests</span><span>cli</span><span>proot</span></div>
+      </a>
+
+      <a class="card" href="https://github.com/Xnode-sh/sockpuppet-hunter">
+        <div class="top"><h3>sockpuppet-hunter</h3><span class="lang">Python · MIT</span></div>
+        <p>Детектор связанных аккаунтов. Сшивает разные профили в кластеры по совокупности сигналов — не просто ищет «где зарегистрирован».</p>
+        <ul>
+          <li>Perceptual hash аватарок, схожесть никнеймов, bio-overlap</li>
+          <li>~30 платформ: GitHub, Reddit, TikTok, Telegram и др.</li>
+          <li>Экспорт в JSON и Mermaid-граф кластеров</li>
+        </ul>
+        <div class="tags"><span>osint</span><span>clustering</span><span>perceptual-hash</span><span>30+ platforms</span></div>
+      </a>
+
+      <a class="card" href="https://github.com/Xnode-sh/netmon">
+        <div class="top"><h3>netmon</h3><span class="lang">Python · Windows</span></div>
+        <p>LAN-монитор для Windows. Инвентаризация устройств, DNS-лог через ETW, захват трафика через PktMon, доступ к роутеру.</p>
+        <ul>
+          <li>OUI-база: MAC → производитель без интернета</li>
+          <li>DNS-лог в реальном времени через ETW-канал</li>
+          <li>pcap-экспорт для Wireshark</li>
+        </ul>
+        <div class="tags"><span>pktmon</span><span>etw</span><span>sqlite</span><span>windows-only</span></div>
+      </a>
+
+      <a class="card" href="https://github.com/Xnode-sh/vibe-chat">
+        <div class="top"><h3>vibe-chat</h3><span class="lang">Python · Node.js</span></div>
+        <p>TUI-чат с двумя AI-агентами одновременно: Claude Code и opencode в одном терминальном интерфейсе на Textual.</p>
+        <ul>
+          <li>Режимы: только Claude, только opencode, оба сразу</li>
+          <li>История контекста, переключение горячими клавишами</li>
+          <li>Модель opencode настраивается через env-переменную</li>
+        </ul>
+        <div class="tags"><span>textual</span><span>claude-code</span><span>opencode</span><span>tui</span></div>
+      </a>
+
+      <a class="card" href="https://github.com/Xnode-sh/wifi-audit">
+        <div class="top"><h3>wifi-audit</h3><span class="lang">Python · stdlib</span></div>
+        <p>Аудитор паролей Wi-Fi без зависимостей. Словарь топ-10k, паттерны дат и годов, русские имена, энтропия и оценка по 100-балльной шкале.</p>
+        <ul>
+          <li>Детект qwerty / йцукен / дата / повторы</li>
+          <li>~200 русских и транслит-имён в базе</li>
+          <li>Только Python stdlib — ничего устанавливать не нужно</li>
+        </ul>
+        <div class="tags"><span>wifi</span><span>password</span><span>audit</span><span>stdlib</span></div>
       </a>
 
     </div>
