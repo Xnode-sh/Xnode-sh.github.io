@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Блог · RED·TEAM·LAB</title>
+<meta name="description" content="Новости RED TEAM LAB: privacy-native AI-терминал с локальными моделями, P2P без облака.">
+<link rel="canonical" href="https://redteam.is-a.dev/blog.html">
+<meta property="og:title" content="RED·TEAM·LAB · Блог">
+<meta property="og:description" content="AI-агент прямо в телефоне, живой шелл, тайлинг окон. Без облака.">
+<meta name="theme-color" content="#0b0d10">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230b0d10'/><path d='M7 11l5 5-5 5' stroke='%23ff2e4d' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/><path d='M15 21h10' stroke='%23ff2e4d' stroke-width='2.5' stroke-linecap='round'/></svg>">
+<style>
+:root{
+  --bg:#0b0d10; --panel:#12161b; --line:#232a33;
+  --fg:#e7ecf2; --muted:#8e9bab; --red:#ff2e4d; --red-dim:#c4162f;
+  --mono:ui-monospace,SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);
+  line-height:1.65;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(900px 500px at 50% -10%,rgba(255,46,77,.10),transparent 70%);
+}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+a{color:var(--fg);text-decoration:none}
+a:hover{color:var(--red)}
+
+/* header */
+header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(11,13,16,.85);backdrop-filter:blur(8px);z-index:10}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px}
+.logo{font-family:var(--mono);font-weight:700;letter-spacing:.06em;font-size:15px;white-space:nowrap}
+.logo .r{color:var(--red)}
+.bar nav{display:flex;gap:18px;font-size:14px;color:var(--muted)}
+.bar nav a{color:var(--muted)}
+
+/* hero */
+.hero{padding:64px 0 48px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:0 0 18px}
+h1{font-size:clamp(34px,8vw,60px);line-height:1.05;margin:0 0 20px;letter-spacing:-.02em;font-weight:800}
+h1 .dot{color:var(--red)}
+.lead{font-size:clamp(16px,4vw,19px);color:var(--muted);max-width:56ch;margin:0 0 32px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:10px;font-weight:600;font-size:15px;border:1px solid var(--line);transition:.15s}
+.btn-main{background:var(--red);border-color:var(--red);color:#fff}
+.btn-main:hover{background:var(--red-dim);border-color:var(--red-dim);color:#fff}
+.btn-ghost:hover{border-color:var(--red);color:var(--red)}
+
+/* terminal */
+.term{margin:40px 0 0;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.term-bar{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.term-bar i{width:10px;height:10px;border-radius:50%;background:#2c3541;display:block}
+.term-bar i:first-child{background:var(--red)}
+.term-bar span{margin-left:8px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.term pre{margin:0;padding:16px 14px;font-family:var(--mono);font-size:13px;line-height:1.75;color:var(--fg);overflow-x:auto}
+.term .p{color:var(--red)}
+.term .c{color:var(--muted)}
+
+/* sections */
+section{padding:56px 0;border-top:1px solid var(--line)}
+h2{font-size:13px;font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 28px;font-weight:600}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px;transition:.15s}
+.card:hover{border-color:var(--red)}
+.card h3{margin:0 0 10px;font-size:17px}
+.card code{font-family:var(--mono);font-size:.9em;color:var(--fg)}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.card .num{font-family:var(--mono);font-size:12px;color:var(--red);display:block;margin-bottom:12px}
+
+/* links list */
+.links{display:grid;gap:12px}
+.link{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px;transition:.15s}
+.link:hover{border-color:var(--red)}
+.link b{display:block;font-size:16px}
+.link small{color:var(--muted);font-size:14px}
+.link .arrow{color:var(--red);font-family:var(--mono);flex-shrink:0}
+
+/* projects */
+.proj{display:grid;gap:16px}
+.proj .card{display:block}
+.proj .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px}
+.proj h3{margin:0;font-family:var(--mono);font-size:17px}
+.proj .lang{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.proj ul{margin:14px 0 0;padding-left:18px;color:var(--muted);font-size:14.5px}
+.proj li{margin:4px 0}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.tags span{font-family:var(--mono);font-size:11.5px;padding:3px 8px;border:1px solid var(--line);border-radius:6px;color:var(--muted)}
+
+/* note */
+.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--red);border-radius:8px;padding:18px 20px;color:var(--muted);font-size:14.5px}
+.note b{color:var(--fg)}
+
+footer{border-top:1px solid var(--line);padding:32px 20px 48px;color:var(--muted);font-size:14px}
+footer .row{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between}
+footer a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+</style>
+<style>
+.post{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:26px 24px;margin:0 0 20px}
+.post .meta{font-family:var(--mono);font-size:12px;color:var(--red);letter-spacing:.08em;margin:0 0 10px}
+.post h3{margin:0 0 14px;font-size:22px;line-height:1.25}
+.post p{margin:0 0 12px;color:var(--muted)}
+.post p b{color:var(--fg)}
+.post ul{margin:0 0 14px;padding-left:20px;color:var(--fg)}
+.post li{margin:5px 0}
+.post code{font-family:var(--mono);font-size:.9em;color:var(--red)}
+.post table{border-collapse:collapse;width:100%;font-size:14.5px;margin:4px 0 14px}
+.post td{border-top:1px solid var(--line);padding:7px 8px 7px 0;vertical-align:top}
+.post td:first-child{color:var(--muted);font-family:var(--mono);white-space:nowrap;width:30%}
+.post h4{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:18px 0 8px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="/">RED<span class="r">·</span>TEAM<span class="r">·</span>LAB</a>
+    <nav>
+      <a href="/#projects">Проекты</a>
+      <a href="/blog.html" style="color:var(--fg)">Блог</a>
+      <a href="/#links">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero" style="padding-bottom:32px">
+    <p class="kicker">// devlog</p>
+    <h1>Блог<span class="dot">.</span></h1>
+    <p class="lead">Как строим RED TEAM LAB: privacy-native AI-терминал. Локальные модели, P2P без облака.</p>
+  </div>
+
+  <article class="post" id="agent">
+    <p class="meta">01.10.2026 · AI</p>
+    <h3>AI-агент прямо в телефоне. Без облака.</h3>
+    <p>RED TEAM LAB учится думать сам:</p>
+    <ul>
+      <li>получает задачу и раскладывает её на шаги</li>
+      <li>сам выполняет bash-команды</li>
+      <li>смотрит на ошибку, запоминает и в следующий раз делает иначе</li>
+    </ul>
+    <p>Память агента лежит в SQLite на самом устройстве. Модель (Qwen ~2B, GGUF) крутится локально через llama.cpp. Ни одна команда и ни один файл не уходят на чужой сервер.</p>
+    <p>Под капотом: Flutter для интерфейса, Rust для ядра.</p>
+    <p><b>Честно:</b> это MVP, агент сейчас в работе. 2B-модель на телефоне пока думает медленно, ускоряем. Зато всё твоё остаётся твоим.</p>
+  </article>
+
+  <article class="post" id="terminal">
+    <p class="meta">01.10.2026 · Терминал</p>
+    <h3>Что уже работает на телефоне</h3>
+    <ul>
+      <li><b>Живой шелл.</b> Не эмуляция, команды реально выполняются.</li>
+      <li><b>Плитки окон как в Hyprland:</b> несколько терминалов рядом, границы тянутся.</li>
+      <li><b>Guard.</b> Каждая команда проходит проверку перед запуском. <code>rm -rf /</code> блокируется сразу, опасные требуют подтверждения.</li>
+      <li>Тёмный cyberpunk-интерфейс, красный акцент.</li>
+    </ul>
+    <p>Дальше: busybox для полного набора команд, нормальный PTY, AI-подсказки в строке ввода, потом синхронизация между устройствами по P2P без облака.</p>
+    <p>Пока Android. Windows, Linux и macOS на очереди.</p>
+  </article>
+
+  <article class="post" id="en" lang="en">
+    <p class="meta">01.10.2026 · English</p>
+    <h3>A privacy-native AI terminal</h3>
+    <p>Most AI dev tools send your commands, files and shell history to someone else's server. RED TEAM LAB runs the model on your device and keeps everything there.</p>
+    <h4>Works today (Android, MVP)</h4>
+    <ul>
+      <li>Real shell session, not an emulator</li>
+      <li>Tiling window layout inspired by Hyprland</li>
+      <li>Command guard in Rust: <code>rm -rf /</code> → BLOCK, risky ops → confirm</li>
+    </ul>
+    <h4>In progress</h4>
+    <ul>
+      <li><b>On-device agent:</b> plans a task, runs bash, stores failures in local SQLite memory and adjusts next time</li>
+      <li><b>Local inference:</b> GGUF models (Qwen ~2B, Q4) via llama.cpp, memory-mapped; heavier reasoning can optionally go to Claude API, opt-in</li>
+      <li><b>MESH:</b> device-to-device sync without a server, signed packets, optional routing over Tor (arti)</li>
+    </ul>
+    <h4>Stack</h4>
+    <table>
+      <tr><td>UI</td><td>Flutter</td></tr>
+      <tr><td>Core</td><td>Rust</td></tr>
+      <tr><td>AI</td><td>llama.cpp, Python tooling</td></tr>
+      <tr><td>Storage</td><td>SQLite</td></tr>
+      <tr><td>Crypto</td><td>ed25519, x25519, ChaCha20-Poly1305, BLAKE3</td></tr>
+      <tr><td>Network</td><td>P2P, arti (Tor)</td></tr>
+    </table>
+    <p><b>Honest status:</b> early MVP. A 2B model on a phone is still slow for agent loops; no on-device benchmarks published yet.</p>
+  </article>
+</main>
+
+<footer class="wrap">
+  <div class="row">
+    <span>© <span id="y">2026</span> Xnode · <a href="https://t.me/xnode_sh">@xnode_sh</a></span>
+    <span>
+      <a href="/">Главная</a> ·
+      <a href="/terms.html">Условия</a> ·
+      <a href="/privacy.html">Приватность</a>
+    </span>
+  </div>
+</footer>
+
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
