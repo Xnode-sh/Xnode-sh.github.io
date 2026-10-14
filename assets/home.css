@@ -72,6 +72,13 @@ h1.title em{color:var(--red);font-style:normal}
 .marquee .track{display:inline-block;white-space:nowrap;font:12px var(--mono);letter-spacing:.28em;color:var(--muted);padding:13px 0;animation:slide 28s linear infinite}
 @keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
+/* мыслительный процесс — нейро-решётка */
+.hive{position:relative;height:min(46vw,390px);overflow:hidden;background:#031513;border-bottom:1px solid var(--line)}
+.hive img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
+.hive-cap{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 30px;font:11px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#9fe9dd;background:linear-gradient(0deg,rgba(3,21,19,.92),transparent)}
+.hive-cap b{color:#eafffb;font-weight:500}
+@media(max-width:860px){.hive{height:min(64vw,300px)}}
+
 /* sections */
 .sec{padding:64px 0;border-bottom:1px solid var(--line)}
 .sec-head{display:grid;grid-template-columns:64px 1fr;grid-template-areas:"n h" "n p";gap:0 18px;margin-bottom:30px;align-items:end}
