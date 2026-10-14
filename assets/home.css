@@ -78,6 +78,10 @@ h1.title em{color:var(--red);font-style:normal}
 .hive-cap{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 30px;font:11px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#9fe9dd;background:linear-gradient(0deg,rgba(3,21,19,.92),transparent)}
 .hive-cap b{color:#eafffb;font-weight:500}
 @media(max-width:860px){.hive{height:min(64vw,300px)}}
+/* команда думает среди кубиков */
+#team{position:relative;overflow:hidden}
+#team>.team-matrix{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.14;z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,#000,transparent 88%);mask-image:linear-gradient(180deg,#000,transparent 88%)}
+#team>.sec-head,#team>.crew-grid,#team>.node{position:relative;z-index:1}
 
 /* sections */
 .sec{padding:64px 0;border-bottom:1px solid var(--line)}
