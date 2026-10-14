@@ -97,6 +97,9 @@ h1.title em{color:var(--red);font-style:normal}
 /* team */
 .crew-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .member{position:relative;border:1px solid var(--line);border-radius:8px;padding:28px 26px;overflow:hidden;background:var(--panel)}
+.member .av{position:relative;width:104px;height:104px;display:block;margin:0 0 16px;border-radius:50%;background:#0a0a0e;border:2px solid var(--line2);transition:transform .25s}
+.member:hover .av{transform:translateY(-3px) scale(1.03)}
+.member.freya .av{border-color:var(--green)}.member.lira .av{border-color:var(--violet)}.member.kripto .av{border-color:var(--pink)}
 .member .mono{position:absolute;right:-6px;top:-24px;font:800 120px/1 var(--sans);color:#151519;letter-spacing:-.05em;pointer-events:none}
 .member:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
 .member.freya:before{background:var(--green)}.member.lira:before{background:var(--violet)}.member.kripto:before{background:var(--pink)}
