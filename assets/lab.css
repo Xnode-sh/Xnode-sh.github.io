@@ -11,3 +11,18 @@ body:not(.home){background-image:none}.post,.term{background:var(--panel);box-sh
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
 .agent-mark{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:2rem;letter-spacing:.12em;padding:1.35rem;border:1px solid rgba(255,255,255,.14);border-radius:14px;margin-bottom:1rem;background:linear-gradient(135deg,rgba(69,240,208,.12),rgba(181,122,255,.12));}
 .agent-mark.freya{color:#45f0d0}.agent-mark.lira{color:#b57aff}.agent-mark.kripto{color:#ff7bb8}
+/* изюминка: печатающийся девиз, дыхание маскота, фокус команды */
+.hero-typed{margin:16px 0 0;font:600 15px var(--mono);color:#e5566b;min-height:1.5em;letter-spacing:.01em}
+.hero-typed:after{content:"▌";margin-left:2px;color:var(--red);animation:blink 1.05s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-art .mascot{animation:float 5.5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-9px)}}
+.focus{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:22px}
+.focus>div{border:1px solid var(--line);border-radius:5px;padding:18px 20px;background:var(--panel);position:relative;overflow:hidden}
+.focus>div:before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--red)}
+.focus .freya:before{background:#45f0d0}.focus .lira:before{background:#b57aff}.focus .kripto:before{background:#ff7bb8}
+.focus b{font:600 12px var(--mono);letter-spacing:.12em}
+.focus .freya b{color:#45f0d0}.focus .lira b{color:#b57aff}.focus .kripto b{color:#ff7bb8}
+.focus small{display:block;color:var(--muted);font-size:12.5px;margin-top:7px}
+@media(max-width:760px){.focus{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.hero-art .mascot{animation:none}.hero-typed:after{animation:none}}
