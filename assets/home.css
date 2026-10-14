@@ -82,6 +82,22 @@ h1.title em{color:var(--red);font-style:normal}
 #team{position:relative;overflow:hidden}
 #team>.team-matrix{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.14;z-index:0;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,#000,transparent 88%);mask-image:linear-gradient(180deg,#000,transparent 88%)}
 #team>.sec-head,#team>.crew-grid,#team>.node{position:relative;z-index:1}
+/* три компаньона — каждый в своей матрице */
+.comp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.comp{position:relative;height:362px;border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:#04060a;display:flex;align-items:flex-start;justify-content:center}
+.comp-matrix{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;z-index:0}
+.comp.freya .comp-matrix{filter:hue-rotate(-28deg) saturate(1.15)}
+.comp.lira .comp-matrix{filter:hue-rotate(92deg) saturate(1.15)}
+.comp.kripto .comp-matrix{filter:hue-rotate(165deg) saturate(1.15)}
+.comp-av{position:relative;z-index:1;width:132px;height:132px;margin-top:46px;filter:drop-shadow(0 10px 34px rgba(0,0,0,.75));animation:float 5.5s ease-in-out infinite}
+.comp.freya{border-color:rgba(69,240,208,.45)}
+.comp.lira{border-color:rgba(181,122,255,.45)}
+.comp.kripto{border-color:rgba(255,123,184,.45)}
+.comp-plate{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:14px 16px;text-align:center;background:linear-gradient(0deg,rgba(4,6,10,.96),rgba(4,6,10,.55));border-top:1px solid var(--line2)}
+.comp-plate b{display:block;font:700 18px var(--mono);letter-spacing:.05em}
+.comp.freya .comp-plate b{color:#45f0d0}.comp.lira .comp-plate b{color:#b57aff}.comp.kripto .comp-plate b{color:#ff7bb8}
+.comp-plate small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
+@media(max-width:860px){.comp-grid{grid-template-columns:1fr}.comp{height:300px}}
 
 /* sections */
 .sec{padding:64px 0;border-bottom:1px solid var(--line)}
