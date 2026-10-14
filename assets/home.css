@@ -97,7 +97,13 @@ h1.title em{color:var(--red);font-style:normal}
 /* team */
 .crew-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .member{position:relative;border:1px solid var(--line);border-radius:8px;padding:28px 26px;overflow:hidden;background:var(--panel)}
-.member .av{position:relative;width:104px;height:104px;display:block;margin:0 0 16px;border-radius:50%;background:#0a0a0e;border:2px solid var(--line2);transition:transform .25s}
+.member .av{position:relative;width:104px;height:104px;display:block;margin:0;border-radius:50%;background:#0a0a0e;border:2px solid var(--line2);transition:transform .25s}
+.avwrap{position:relative;display:inline-block;margin:0 0 18px}
+.avwrap::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:1.5px dashed var(--line2);animation:spin 20s linear infinite;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.member.freya .avwrap::after{border-color:rgba(69,240,208,.5)}
+.member.lira .avwrap::after{border-color:rgba(181,122,255,.5)}
+.member.kripto .avwrap::after{border-color:rgba(255,123,184,.5)}
 .member:hover .av{transform:translateY(-3px) scale(1.03)}
 .member.freya .av{border-color:var(--green)}.member.lira .av{border-color:var(--violet)}.member.kripto .av{border-color:var(--pink)}
 .member .mono{position:absolute;right:-6px;top:-24px;font:800 120px/1 var(--sans);color:#151519;letter-spacing:-.05em;pointer-events:none}
