@@ -97,10 +97,9 @@ h1.title em{color:var(--red);font-style:normal}
 .comp-plate b{display:block;font:700 18px var(--mono);letter-spacing:.05em}
 .comp.freya .comp-plate b{color:#45f0d0}.comp.lira .comp-plate b{color:#b57aff}.comp.kripto .comp-plate b{color:#ff7bb8}
 .comp-plate small{display:block;color:var(--muted);font-size:12px;margin-top:3px}
-/* один в один: живые boot-панели в ряд */
-.boot-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.boot{width:100%;height:300px;border:1px solid var(--line2);border-radius:12px;background:#06070a;display:block}
-@media(max-width:860px){.boot-row{grid-template-columns:1fr}.boot{height:340px}}
+/* один в один: живые boot-панели во всю ширину, стопкой */
+.boot-row{display:grid;grid-template-columns:1fr;gap:18px}
+.boot{width:100%;aspect-ratio:1040/600;border:1px solid var(--line2);border-radius:12px;background:#06070a;display:block}
 @media(max-width:860px){.comp-grid{grid-template-columns:1fr}.comp{height:300px}}
 
 /* sections */
