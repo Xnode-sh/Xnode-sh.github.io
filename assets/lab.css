@@ -26,3 +26,11 @@ body:not(.home){background-image:none}.post,.term{background:var(--panel);box-sh
 .focus small{display:block;color:var(--muted);font-size:12.5px;margin-top:7px}
 @media(max-width:760px){.focus{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.hero-art .mascot{animation:none}.hero-typed:after{animation:none}}
+/* заметнее: пульс индикатора и бегущий блик по хиро-арту */
+.eyebrow:before{animation:pulse 1.9s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.3;transform:scale(.75)}}
+.hero-art .scan{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.hero-art .scan:before{content:"";position:absolute;left:0;right:0;height:34%;top:-40%;background:linear-gradient(180deg,transparent,rgba(229,86,107,.12),transparent);animation:sweep 6.5s linear infinite}
+@keyframes sweep{0%{top:-40%}100%{top:120%}}
+.hero-typed{font-size:17px}
+@media(prefers-reduced-motion:reduce){.eyebrow:before{animation:none}.hero-art .scan:before{animation:none}}
