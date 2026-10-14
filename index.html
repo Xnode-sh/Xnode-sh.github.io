@@ -1,89 +1,78 @@
-<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>XNODE — RED └•TEAM•┐ lab™</title><meta name="description" content="RED └•TEAM•┐ lab™ — инженерная лаборатория XNODE. Linux, AI-инструменты и авторизованная безопасность. Команда FREYA / LIRA / KRIPTO."><link rel="canonical" href="https://redteam.is-a.dev/"><meta name="theme-color" content="#09090b"><meta property="og:type" content="website"><meta property="og:title" content="XNODE — RED └•TEAM•┐ lab™"><meta property="og:description" content="Research • Tools • OSINT • AI. Инструменты, исследования и инженерный процесс."><meta property="og:url" content="https://redteam.is-a.dev/"><meta property="og:image" content="https://redteam.is-a.dev/assets/social-preview.png"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/assets/rig-node.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/lab.css"></head><body class="home"><a class="skip" href="#main">Перейти к содержимому</a><header><div class="wrap bar"><a class="logo" href="/" aria-label="XNODE — главная"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 8Q16 12 29 8M5 14H27M9 10L8 28M23 10L24 28"/></svg>XNODE</a><nav aria-label="Основная навигация"><a href="/#projects">Проекты</a><a href="/#team">Команда</a><a href="/blog.html">Блог</a><a class="nav-github" href="https://github.com/Xnode-sh">GitHub ↗</a></nav></div></header><main id="main" class="wrap"><div class="home-hero"><div class="hero-copy"><div class="eyebrow">Независимая инженерная лаборатория</div><h1 class="hero-title">XNODE</h1><p class="brand-line">RED <span>└•TEAM•┐</span> lab™</p><p class="lead">Исследуем системы. Создаём инструменты.<br>Собираем идеи в работающий код —<br>от Linux до терминала в кармане.</p><p class="disciplines">Research · Tools · OSINT · AI</p><p class="hero-typed" aria-live="polite"></p><div class="cta"><a class="btn btn-main" href="#projects">Исследовать проекты <span aria-hidden="true">↓</span></a><a class="btn" href="https://github.com/Xnode-sh/RED-TEAM-LAB">В штаб <span aria-hidden="true">↗</span></a></div></div><div class="hero-art"><img class="scene" src="/assets/landscape.svg" width="500" height="440" alt="Красное солнце над горами и torii"><img class="mascot" src="/assets/rig-node.svg" width="200" height="185" alt="NODE — кибер-лисёнок, маскот лаборатории"><div class="art-caption"><span>RED / RESEARCH LAB</span><span>NODE / MASCOT</span></div><div class="scan"></div></div></div><div class="system-strip"><span><strong>01 /</strong> LINUX + ANDROID</span><span><strong>02 /</strong> OPEN SOURCE</span><span><strong>03 /</strong> FREYA · LIRA · KRIPTO</span></div>
-<section id="projects"><div class="section-head"><div><span class="section-label">01 / Репозитории</span><h2>Из лаборатории — в терминал.</h2></div><p>Исследования и инструменты для реальных задач. Код, инструкции и ограничения — в репозиториях.</p></div><a class="card hq" href="https://github.com/Xnode-sh/RED-TEAM-LAB"><div><span class="section-label">CORE / Главный штаб</span><h3>RED-TEAM-LAB</h3><p>Команда, архитектура, рабочие ветки и документация. Центральная точка всей экосистемы XNODE.</p></div><span class="arrow" aria-hidden="true">↗</span></a><div class="proj">
-      <a class="card" href="https://github.com/Xnode-sh/termux-agent">
-        <div class="top"><h3>termux-agent</h3><span class="lang">Python · MIT</span></div>
-        <p class="why">Зачем: ИИ-помощник для терминала, который работает офлайн на телефоне.</p>
-        <p>Локальный LLM-агент с tool-calling для Termux. Модель крутится через Ollama прямо на телефоне, агент только дирижирует вызовами инструментов. Никакого облака.</p>
-        <ul>
-          <li>REPL и одноразовые запросы, выбор модели и хоста флагами</li>
-          <li>Инструменты: shell, файлы, OSINT-лукапы через Xnode</li>
-          <li>Подтверждение опасных операций по умолчанию, тесты на unittest</li>
-        </ul>
-        <div class="tags"><span>ollama</span><span>tool-calling</span><span>pyyaml</span><span>unittest</span></div>
-      </a>
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>XNODE — RED └•TEAM•┐ lab™</title><meta name="description" content="RED └•TEAM•┐ lab™ — инженерная лаборатория XNODE. Linux, AI-инструменты и авторизованная безопасность. Команда FREYA / LIRA / KRIPTO."><link rel="canonical" href="https://redteam.is-a.dev/"><meta name="theme-color" content="#08080a"><meta property="og:type" content="website"><meta property="og:title" content="XNODE — RED └•TEAM•┐ lab™"><meta property="og:description" content="Research • Tools • OSINT • AI. Инженерная лаборатория XNODE."><meta property="og:url" content="https://redteam.is-a.dev/"><meta property="og:image" content="https://redteam.is-a.dev/assets/social-preview.png"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/assets/rig-node.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/home.css"></head>
+<body>
+<a class="skip" href="#main">Перейти к содержимому</a>
+<nav class="top"><div class="wrap nav-in"><a class="brand" href="/" aria-label="XNODE — главная"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 8Q16 12 29 8M5 14H27M9 10L8 28M23 10L24 28"/></svg>XNODE</a><div class="menu"><a href="#projects">Проекты</a><a href="#team">Команда</a><a href="/blog.html">Блог</a><a class="gh" href="https://github.com/Xnode-sh">GitHub ↗</a></div></div></nav>
 
-      <a class="card" href="https://github.com/Xnode-sh/xnode-osint">
-        <div class="top"><h3>xnode-osint</h3><span class="lang">Python · MIT</span></div>
-        <p class="why">Зачем: быстро проверить публичные следы email и разобрать API из консоли.</p>
-        <p>OSINT-утилиты для командной строки. Только пассивная разведка по открытым источникам: без брутфорса и обхода авторизации.</p>
-        <ul>
-          <li><code>email_osint.py</code> — проверка email по публичным сервисам</li>
-          <li><code>holehe_runner.py</code> — обход бага trio-сигналов в proot, чистый JSON на выходе</li>
-          <li><code>api_parser.py</code> — парсер JSON API с пагинацией, ретраями и обработкой 429</li>
-        </ul>
-        <div class="tags"><span>osint</span><span>requests</span><span>cli</span><span>proot</span></div>
-      </a>
+<main id="main">
+  <section class="hero wrap">
+    <div>
+      <span class="tag">RED └•TEAM•┐ lab™ · независимая инженерная лаборатория</span>
+      <h1 class="title">XNODE<em>.</em></h1>
+      <p class="typed" aria-live="polite"></p>
+      <p class="lead">Исследуем системы. Создаём инструменты. Собираем идеи в работающий код — от Linux до терминала в кармане.</p>
+      <div class="cta"><a class="btn primary" href="#projects">Смотреть проекты <span aria-hidden="true">↓</span></a><a class="btn" href="https://github.com/Xnode-sh/RED-TEAM-LAB">В штаб <span aria-hidden="true">↗</span></a></div>
+      <p class="crew"><span class="dot"></span> FREYA · LIRA · KRIPTO <span class="sep">/</span> companion NODE</p>
+    </div>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>xnode@lab — /home/xnode</span></div>
+      <pre class="term-body"><span class="p">$</span> whoami
+<span class="o">red └•team•┐ lab — systems · security · tooling</span>
+<span class="p">$</span> cat motto.txt
+<span class="o">Сначала разрешение — потом проверка.
+минимально · безопасно · воспроизводимо</span>
+<span class="p">$</span> ls crew/
+<span class="o">freya/   lira/   kripto/   node/</span>
+<span class="p">$</span> █</pre>
+      <div class="scan"></div>
+      <img class="mascot" src="/assets/rig-node.svg" width="120" height="111" alt="NODE — маскот">
+    </div>
+  </section>
 
-      <a class="card" href="https://github.com/Xnode-sh/sockpuppet-hunter">
-        <div class="top"><h3>sockpuppet-hunter</h3><span class="lang">Python · MIT</span></div>
-        <p class="why">Зачем: понять, по совокупности сигналов.</p>
-        <p>Детектор связанных аккаунтов. Сшивает разные профили в кластеры по совокупности сигналов — не просто ищет «где зарегистрирован».</p>
-        <ul>
-          <li>Perceptual hash аватарок, схожесть никнеймов, bio-overlap</li>
-          <li>~30 платформ: GitHub, Reddit, TikTok, Telegram и др.</li>
-          <li>Экспорт в JSON и Mermaid-граф кластеров</li>
-        </ul>
-        <div class="tags"><span>osint</span><span>clustering</span><span>perceptual-hash</span><span>30+ platforms</span></div>
-      </a>
+  <div class="marquee" aria-hidden="true"><div class="track">RESEARCH · TOOLS · OSINT · AI · SYSTEMS · SECURITY · LINUX · TERMUX · AUTHORIZED ONLY · RESEARCH · TOOLS · OSINT · AI · SYSTEMS · SECURITY · LINUX · TERMUX · AUTHORIZED ONLY · </div></div>
 
-      <a class="card" href="https://github.com/Xnode-sh/netmon">
-        <div class="top"><h3>netmon</h3><span class="lang">Python · Windows</span></div>
-        <p class="why">Зачем: видеть, что происходит в домашней сети Windows.</p>
-        <p>LAN-монитор для Windows. Инвентаризация устройств, DNS-лог через ETW, захват трафика через PktMon, доступ к роутеру.</p>
-        <ul>
-          <li>OUI-база: MAC → производитель без интернета</li>
-          <li>DNS-лог в реальном времени через ETW-канал</li>
-          <li>pcap-экспорт для Wireshark</li>
-        </ul>
-        <div class="tags"><span>pktmon</span><span>etw</span><span>sqlite</span><span>windows-only</span></div>
-      </a>
+  <section id="projects" class="wrap sec">
+    <div class="sec-head"><span class="num">01</span><h2>Из лаборатории — в терминал.</h2><p>Инструменты и исследования для реальных задач. Код, инструкции и ограничения — в репозиториях.</p></div>
+    <a class="hq" href="https://github.com/Xnode-sh/RED-TEAM-LAB"><span><b>CORE · RED-TEAM-LAB</b><small>Команда, архитектура, рабочие ветки и документация — центральная точка экосистемы.</small></span><span class="ar" aria-hidden="true">↗</span></a>
+    <ul class="plist">
+      <li><a href="https://github.com/Xnode-sh/termux-agent"><span class="n">01</span><b>termux-agent</b><span class="d">Локальный LLM-агент с tool-calling для Termux — офлайн, на телефоне</span><span class="l">Python · MIT</span><span class="a">↗</span></a></li>
+      <li><a href="https://github.com/Xnode-sh/xnode-osint"><span class="n">02</span><b>xnode-osint</b><span class="d">Пассивная OSINT-разведка по открытым источникам из консоли</span><span class="l">Python · MIT</span><span class="a">↗</span></a></li>
+      <li><a href="https://github.com/Xnode-sh/sockpuppet-hunter"><span class="n">03</span><b>sockpuppet-hunter</b><span class="d">Кластеризация связанных аккаунтов по совокупности сигналов</span><span class="l">Python · MIT</span><span class="a">↗</span></a></li>
+      <li><a href="https://github.com/Xnode-sh/netmon"><span class="n">04</span><b>netmon</b><span class="d">LAN-монитор для Windows: инвентарь, DNS-лог через ETW, PktMon</span><span class="l">Python · Windows</span><span class="a">↗</span></a></li>
+      <li><a href="https://github.com/Xnode-sh/vibe-chat"><span class="n">05</span><b>vibe-chat</b><span class="d">TUI-чат с двумя AI-агентами сразу: Claude Code и opencode</span><span class="l">Python · Node.js</span><span class="a">↗</span></a></li>
+      <li><a href="https://github.com/Xnode-sh/wifi-audit"><span class="n">06</span><b>wifi-audit</b><span class="d">Оценка стойкости пароля Wi-Fi без зависимостей</span><span class="l">Python · stdlib</span><span class="a">↗</span></a></li>
+      <li class="wip"><span class="n">07</span><b>RED TEAM LAB terminal</b><span class="d">Терминал со встроенным ИИ-агентом — альфа, публичного релиза нет</span><span class="l">Flutter · Rust</span><span class="a">✳</span></li>
+    </ul>
+  </section>
 
-      <a class="card" href="https://github.com/Xnode-sh/vibe-chat">
-        <div class="top"><h3>vibe-chat</h3><span class="lang">Python · Node.js</span></div>
-        <p class="why">Зачем: сравнивать двух AI-агентов в одном окне терминала.</p>
-        <p>TUI-чат с двумя AI-агентами одновременно: Claude Code и opencode в одном терминальном интерфейсе на Textual.</p>
-        <ul>
-          <li>Режимы: только Claude, только opencode, оба сразу</li>
-          <li>История контекста, переключение горячими клавишами</li>
-          <li>Модель opencode настраивается через env-переменную</li>
-        </ul>
-        <div class="tags"><span>textual</span><span>claude-code</span><span>opencode</span><span>tui</span></div>
-      </a>
+  <div class="wrap" style="margin:44px auto"><img src="/assets/landscape.svg" alt="" style="width:100%;max-height:250px;object-fit:cover;border:1px solid var(--line2);border-radius:8px;display:block;opacity:.9"></div>
 
-      <a class="card" href="https://github.com/Xnode-sh/wifi-audit">
-        <div class="top"><h3>wifi-audit</h3><span class="lang">Python · stdlib</span></div>
-        <p class="why">Зачем: проверить, насколько слабый у вас пароль Wi-Fi.</p>
-        <p>Аудитор паролей Wi-Fi без зависимостей. Словарь топ-10k, паттерны дат и годов, русские имена, энтропия и оценка по 100-балльной шкале.</p>
-        <ul>
-          <li>Детект qwerty / йцукен / дата / повторы</li>
-          <li>~200 русских и транслит-имён в базе</li>
-          <li>Только Python stdlib — ничего устанавливать не нужно</li>
-        </ul>
-        <div class="tags"><span>wifi</span><span>password</span><span>audit</span><span>stdlib</span></div>
-      </a>
-      <div class="card wip">
-        <div class="top"><h3>RED TEAM LAB terminal</h3><span class="badge">альфа · v0.7.4</span></div>
-        <p class="why">Зачем: терминал, в котором ИИ понимает тебя с полуслова, а данные не уходят с телефона.</p>
-        <p>Терминал со встроенным ИИ-агентом. Одна строка ввода: команда уходит в шелл, обычный вопрос получает ответ ИИ. Пока Android, публичного релиза нет.</p>
-        <ul>
-          <li>ИИ по умолчанию: авто-детект команды или разговора, без префиксов</li>
-          <li>Живой PTY-шелл, не эмуляция</li>
-          <li>Приветствие при первом запуске, запоминает имя</li>
-          <li>Guard на Rust: <code>rm -rf /</code> блокируется, опасное требует подтверждения</li>
-        </ul>
-        <div class="tags"><span>flutter</span><span>rust</span><span>llama.cpp</span><span>qwen 1.5b</span></div>
-      </div></div></section>
-<section id="team"><div class="section-head"><div><span class="section-label">02 / Команда</span><h2>Три роли. Общая система.</h2></div><p>Linux, мобильные среды и автоматизация — каждая зона со своим инженером.</p></div><div class="team-grid"><article class="card team-card"><div class="agent-mark freya">FREYA</div><p>Desktop & Engineering Coordinator — Qtile, автоматизация, документация и интеграция.</p></article><article class="card team-card"><div class="agent-mark lira">LIRA / VEGA</div><p>Offensive Security Engineer — авторизованный аудит, OSINT и red-team tooling.</p></article><article class="card team-card"><div class="agent-mark kripto">KRIPTO / RIG</div><p>Systems & Linux Engineer — Linux, железо, загрузка, сеть и стабильность.</p></article></div><div class="focus"><div class="freya"><b>FREYA</b><small>десктоп · автоматизация · координация</small></div><div class="lira"><b>LIRA</b><small>security-аудит · OSINT · red-team tooling</small></div><div class="kripto"><b>KRIPTO</b><small>Linux · железо · сеть · стабильность</small></div></div><p class="node-note"><img src="/assets/rig-node.svg" width="37" height="37" loading="lazy" alt="">NODE — маскот лаборатории. Маленький спутник больших инженерных задач.</p></section>
-<section id="workflow"><div class="section-head"><div><span class="section-label">03 / Процесс</span><h2>От идеи до проверенного изменения.</h2></div><p>Рабочие ветки, проверки и review. Каждый шаг оставляет понятный след.</p></div><div class="workflow" aria-label="Этапы работы"><span>PLAN</span><i aria-hidden="true">→</i><span>ISSUE</span><i aria-hidden="true">→</i><span>BRANCH</span><i aria-hidden="true">→</i><span>WORK</span><i aria-hidden="true">→</i><span>TEST</span><i aria-hidden="true">→</i><span>PR</span><i aria-hidden="true">→</i><span>REVIEW</span><i aria-hidden="true">→</i><span>MERGE</span></div><a class="workflow-link" href="https://github.com/Xnode-sh/RED-TEAM-LAB/blob/main/WORKFLOW.md">Правила работы лаборатории ↗</a></section>
-<section id="links"><div class="section-head"><div><span class="section-label">04 / На связи</span><h2>Код. Материалы. Демо.</h2></div></div><div class="links"><a class="link" href="https://github.com/Xnode-sh"><span><b>GitHub</b><small>Исходники, issues и PR</small></span><span class="arrow" aria-hidden="true">↗</span></a><a class="link" href="https://t.me/xnode_sh"><span><b>Telegram</b><small>@xnode_sh · лаборатория</small></span><span class="arrow" aria-hidden="true">↗</span></a><a class="link" href="https://www.tiktok.com/@xnode.sh"><span><b>TikTok</b><small>@xnode.sh · короткие демо</small></span><span class="arrow" aria-hidden="true">↗</span></a></div></section>
-<section><p class="note"><b>Ответственная инженерия.</b> Инструменты предназначены для исследования открытых данных и работы со своими системами либо с разрешения владельца.</p></section></main><footer><div class="wrap row"><span class="site-footer-brand">© 2026 RED └•TEAM•┐ lab™ / XNODE</span><span><a href="/studio.html">Content Studio</a> · <a href="/terms.html">Условия</a> · <a href="/privacy.html">Приватность</a></span></div></footer><script>(function(){var e=document.querySelector(".hero-typed");if(!e)return;var t="Сначала разрешение — потом проверка. Минимально · безопасно · воспроизводимо.";if(matchMedia("(prefers-reduced-motion: reduce)").matches){e.textContent=t;return}var i=0;function k(){e.textContent=t.slice(0,i++);if(i<=t.length)setTimeout(k,42);else setTimeout(function(){i=0;k()},2600)}k()})();</script></body></html>
+  <section id="team" class="wrap sec">
+    <div class="sec-head"><span class="num">02</span><h2>Три роли. Общая система.</h2><p>Системы, автоматизация и безопасность — у каждой зоны свой инженер.</p></div>
+    <div class="crew-grid">
+      <article class="member freya"><span class="mono">FR</span><h3>FREYA</h3><p>Desktop &amp; Engineering Coordinator</p><small>Qtile, автоматизация, companion-UI, документация, координация</small></article>
+      <article class="member lira"><span class="mono">LI</span><h3>LIRA / VEGA</h3><p>Offensive Security Engineer</p><small>Авторизованный аудит, OSINT, red-team tooling</small></article>
+      <article class="member kripto"><span class="mono">KR</span><h3>KRIPTO / RIG</h3><p>Systems &amp; Linux Engineer</p><small>Linux, железо, загрузка, сеть, стабильность</small></article>
+    </div>
+    <p class="node"><img src="/assets/rig-node.svg" width="36" height="33" alt="">NODE — маскот лаборатории. Маленький спутник больших инженерных задач.</p>
+  </section>
+
+  <section id="process" class="wrap sec">
+    <div class="sec-head"><span class="num">03</span><h2>От идеи до проверенного изменения.</h2><p>Рабочие ветки, проверки и review. Каждый шаг оставляет понятный след.</p></div>
+    <div class="steps" aria-label="Этапы работы"><span>PLAN</span><span>→</span><span>ISSUE</span><span>→</span><span>BRANCH</span><span>→</span><span>WORK</span><span>→</span><span>TEST</span><span>→</span><span>PR</span><span>→</span><span>REVIEW</span><span>→</span><span>MERGE</span></div>
+  </section>
+
+  <section id="links" class="wrap sec">
+    <div class="sec-head"><span class="num">04</span><h2>На связи.</h2><p>Код, материалы и короткие демо.</p></div>
+    <div class="link-grid">
+      <a href="https://github.com/Xnode-sh"><span><b>GitHub</b><small>исходники, issues и PR</small></span><span class="ar" aria-hidden="true">↗</span></a>
+      <a href="https://t.me/xnode_sh"><span><b>Telegram</b><small>@xnode_sh · лаборатория</small></span><span class="ar" aria-hidden="true">↗</span></a>
+      <a href="https://www.tiktok.com/@xnode.sh"><span><b>TikTok</b><small>@xnode.sh · демо</small></span><span class="ar" aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section class="wrap"><p class="note"><b>Ответственная инженерия.</b> Инструменты предназначены для исследования открытых данных и работы со своими системами либо с разрешения владельца.</p></section>
+</main>
+
+<footer><div class="wrap row"><span class="fb">© 2026 RED └•TEAM•┐ lab™ / XNODE</span><span><a href="/studio.html">Content Studio</a> · <a href="/terms.html">Условия</a> · <a href="/privacy.html">Приватность</a></span></div></footer>
+<script>(function(){var e=document.querySelector(".typed");if(!e)return;var t="Сначала разрешение — потом проверка. Минимально · безопасно · воспроизводимо.";if(matchMedia("(prefers-reduced-motion: reduce)").matches){e.textContent=t;return}var i=0;function k(){e.textContent=t.slice(0,i++);if(i<=t.length)setTimeout(k,42);else setTimeout(function(){i=0;k()},2600)}k()})();</script>
+</body></html>
